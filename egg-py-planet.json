@@ -1,0 +1,42 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2024-03-29T15:38:12+01:00",
+    "name": "PyPlanet",
+    "author": "sebastien@rod.contact",
+    "description": "PyPlanet is a Maniaplanet\/Trackmania Dedicated Server Controller that works on Python 3.6 until version 3.8 (we are working 3.9 and later). Because Maniaplanet\/Trackmania is using a system that can be event based we use AsyncIO to provide an event loop and have simultaneously processing of received events from the dedicated server.",
+    "features": null,
+    "docker_images": {
+        "ghcr.io\/rodseb\/pyplanet:python": "ghcr.io\/rodseb\/pyplanet:python"
+    },
+    "file_denylist": [],
+    "startup": ".\/manage.py start",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"Apps successfully started!\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n\r\n#Make Server Dir\r\nif [ ! -d \/mnt\/server\/ ]; then\r\n    mkdir \/mnt\/server\/\r\nfi\r\ncd \/mnt\/server\/\r\n\r\necho \"init pyplanet\"\r\npyplanet init_project ${NAME_PROJECT}\r\n\r\nmv .\/${NAME_PROJECT}\/* .\/ && rm -R ${NAME_PROJECT}",
+            "container": "ghcr.io\/rodseb\/pyplanet:install",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Name project",
+            "description": "",
+            "env_variable": "NAME_PROJECT",
+            "default_value": "canyon_server",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:20",
+            "field_type": "text"
+        }
+    ]
+}
